@@ -12,7 +12,7 @@ pipeline {
                     echo 'Building windows project'
                   }
 
-                  Deploy: {
+                  sdfdsf: {
                     echo 'deploying the build'
                   }
 
