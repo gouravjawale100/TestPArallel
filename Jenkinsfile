@@ -3,36 +3,29 @@ pipeline {
 
     stages {
         stage('Build and run') {
-          parallel {
-            stage('master-agent-pipeline') {
-              stages{
-                stage('Build') {
+          
                 steps {
-                  echo 'Building windows project'
+
+                 parallel(
+
+                  Build: {
+                    echo 'Building windows project'
+                  }
+
+                  Deploy: {
+                    echo 'deploying the build'
+                  }
+
+                  Test: {
+                    echo 'Testing the project'
+                  }
+
+                  )
+                  
                   }
                 }
-                stage('Test') {
-                  steps {
-                    echo 'Testing windows project'
-                 }
+                
                 }
 	       }
-              }
-            stage('ubuntu-agent-pipeline') {
-              stages{
-                stage('Build') {
-                steps {
-                  echo 'Building ubuntu project'
-                  }
-                }
-                stage('Test') {
-                  steps {
-                    echo 'Testing ubuntu project'
-                 }
-                }
-               }
-              }
-             }
-            }
-           }
-          }
+              
+            
