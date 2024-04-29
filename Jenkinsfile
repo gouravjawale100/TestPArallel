@@ -2,6 +2,7 @@ pipeline {
     agent none
     stages {
              stage('Build and run') {
+                script {
                             parallel(
 
                                 stage('1 of 1')
@@ -16,8 +17,10 @@ pipeline {
                                 }
                             )
                         }
+                    }
 
                         stage('Build and run part 2') {
+                            script {
                             parallel(
 
                                 stage('2 of 1')
@@ -31,6 +34,7 @@ pipeline {
                                     echo 'Testing the project'
                                 }
                             )
+                        }
                         }
 
 
