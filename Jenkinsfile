@@ -1,6 +1,7 @@
 pipeline {
     agent none
     stages {
+      parallel(
         stage('Build and run') {
             steps {
                 parallel(
@@ -16,5 +17,26 @@ pipeline {
                 )
             }
         }
+
+        stage('Build and run for second') {
+            steps {
+                parallel(
+                    Build: {
+                        echo 'Building ubuntu project'
+                    },
+                    Deploy: {
+                        echo 'deploying the build on ubuntu'
+                    },
+                    Test: {
+                        echo 'Testing the project on ubuntu'
+                    }
+                )
+            }
+        }
+
+
+
+
+        )
     }
 }
