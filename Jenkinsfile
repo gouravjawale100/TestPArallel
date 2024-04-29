@@ -1,9 +1,7 @@
 pipeline {
     agent none
     stages {
-        stage('Parallel Stages') {
-            parallel {
-                stage('Build and run') {
+             stage('Build and run') {
                     steps {
                         echo 'Inside Build and run stage'
                         script {
@@ -41,5 +39,3 @@ pipeline {
                 }
             }
         }
-    }
-}
