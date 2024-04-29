@@ -1,45 +1,43 @@
 pipeline {
     agent none
     stages {
-      parallel(
-      {
-        stage('Build and run') {
-            steps {
-                parallel(
-                    Build: {
-                        echo 'Building windows project'
-                    },
-                    Deploy: {
-                        echo 'deploying the build'
-                    },
-                    Test: {
-                        echo 'Testing the project'
+        parallel(
+            {
+                stage('Build and run') {
+                    steps {
+                        echo 'Inside Build and run stage'
+                        parallel(
+                            Build: {
+                                echo 'Building windows project'
+                            },
+                            Deploy: {
+                                echo 'Deploying the build'
+                            },
+                            Test: {
+                                echo 'Testing the project'
+                            }
+                        )
                     }
-                )
-            }
-        }
-        },
-{
-        stage('Build and run for second') {
-            steps {
-                parallel(
-                    Build: {
-                        echo 'Building ubuntu project'
-                    },
-                    Deploy: {
-                        echo 'deploying the build on ubuntu'
-                    },
-                    Test: {
-                        echo 'Testing the project on ubuntu'
+                }
+            },
+            {
+                stage('Build and run for second') {
+                    steps {
+                        echo 'Inside Build and run for second stage'
+                        parallel(
+                            Build: {
+                                echo 'Building ubuntu project'
+                            },
+                            Deploy: {
+                                echo 'Deploying the build on ubuntu'
+                            },
+                            Test: {
+                                echo 'Testing the project on ubuntu'
+                            }
+                        )
                     }
-                )
+                }
             }
-        }
-      }
-
-
-
-
         )
     }
 }
