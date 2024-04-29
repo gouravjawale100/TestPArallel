@@ -2,40 +2,41 @@ pipeline {
     agent none
     stages {
              stage('Build and run') {
-                    steps {
-                        echo 'Inside Build and run stage'
-                        script {
                             parallel(
-                                Build: {
+
+                                stage('1 of 1')
+                               {
                                     echo 'Building windows project'
-                                },
-                                Deploy: {
+                                }
+                                stage('1 of 2') {
                                     echo 'Deploying the build'
-                                },
-                                Test: {
+                                }
+                                 stage('1 of 3') {
                                     echo 'Testing the project'
                                 }
                             )
                         }
-                    }
-                }
-                stage('Build and run for second') {
-                    steps {
-                        echo 'Inside Build and run for second stage'
-                        script {
+
+                        stage('Build and run part 2') {
                             parallel(
-                                Build: {
-                                    echo 'Building ubuntu project'
-                                },
-                                Deploy: {
-                                    echo 'Deploying the build on ubuntu'
-                                },
-                                Test: {
-                                    echo 'Testing the project on ubuntu'
+
+                                stage('2 of 1')
+                               {
+                                    echo 'Building windows project'
+                                }
+                                stage('2 of 2') {
+                                    echo 'Deploying the build'
+                                }
+                                 stage('2 of 3') {
+                                    echo 'Testing the project'
                                 }
                             )
                         }
+
+
+
+
+
                     }
                 }
-            }
-        }
+                
