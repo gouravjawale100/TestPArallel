@@ -5,31 +5,29 @@ pipeline {
         stage('Build and run') {
           parallel {
             stage('master-agent-pipeline') {
-              agent {label 'master'}
               stages{
                 stage('Build') {
                 steps {
-                  echo 'Building..'
+                  echo 'Building windows project'
                   }
                 }
                 stage('Test') {
                   steps {
-                    echo 'Testing..'
+                    echo 'Testing windows project'
                  }
                 }
 	       }
               }
             stage('ubuntu-agent-pipeline') {
-              agent {label 'ubuntu'}
               stages{
                 stage('Build') {
                 steps {
-                  echo 'Building..'
+                  echo 'Building ubuntu project'
                   }
                 }
                 stage('Test') {
                   steps {
-                    echo 'Testing..'
+                    echo 'Testing ubuntu project'
                  }
                 }
                }
