@@ -16,7 +16,7 @@ pipeline {
                     }
                 )
             }
-        }
+        },
 
         stage('Build and run for second') {
             steps {
