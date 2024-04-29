@@ -1,43 +1,45 @@
 pipeline {
     agent none
     stages {
-        parallel(
-            {
+        stage('Parallel Stages') {
+            parallel {
                 stage('Build and run') {
                     steps {
                         echo 'Inside Build and run stage'
-                        parallel(
-                            Build: {
-                                echo 'Building windows project'
-                            },
-                            Deploy: {
-                                echo 'Deploying the build'
-                            },
-                            Test: {
-                                echo 'Testing the project'
-                            }
-                        )
+                        script {
+                            parallel(
+                                Build: {
+                                    echo 'Building windows project'
+                                },
+                                Deploy: {
+                                    echo 'Deploying the build'
+                                },
+                                Test: {
+                                    echo 'Testing the project'
+                                }
+                            )
+                        }
                     }
                 }
-            },
-            {
                 stage('Build and run for second') {
                     steps {
                         echo 'Inside Build and run for second stage'
-                        parallel(
-                            Build: {
-                                echo 'Building ubuntu project'
-                            },
-                            Deploy: {
-                                echo 'Deploying the build on ubuntu'
-                            },
-                            Test: {
-                                echo 'Testing the project on ubuntu'
-                            }
-                        )
+                        script {
+                            parallel(
+                                Build: {
+                                    echo 'Building ubuntu project'
+                                },
+                                Deploy: {
+                                    echo 'Deploying the build on ubuntu'
+                                },
+                                Test: {
+                                    echo 'Testing the project on ubuntu'
+                                }
+                            )
+                        }
                     }
                 }
             }
-        )
+        }
     }
 }
